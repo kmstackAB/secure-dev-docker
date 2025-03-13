@@ -20,4 +20,4 @@ __pycache__/
 venv/
 .env/
 git_token.txt
-user_rsa
+user_rsa*
