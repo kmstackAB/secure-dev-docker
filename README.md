@@ -61,6 +61,8 @@ ssh-keygen -t rsa -b 4096 -C "build-bot@kmstack.com" -f ./user_rsa
 
 ## 📁 Next Steps
 
+- once your admin has given you access. open `docker-compose.yml` and run services
+
 Any additional setup instructions specific to your project will be included in that project's README or documentation.
 
 ---
