@@ -61,10 +61,24 @@ ssh-keygen -t rsa -b 4096 -C "build-bot@kmstack.com" -f ./user_rsa
 
 ## 📁 Next Steps
 
-- once your admin has given you access. open `docker-compose.yml` and run services
+Once your admin has given you access:
 
-Any additional setup instructions specific to your project will be included in that project's README or documentation.
+1. Open the `docker-compose.yml` file.
+2. Start the services (e.g., using the Docker extension in VS Code or via terminal).
 
+### Attaching to the Dev Container
+
+1. In VS Code, go to the **Docker extension panel** (left sidebar).
+2. Under **Containers**, locate `secure-dev-docker-container`.
+3. Right-click and choose **Attach Shell**, or click **Attach Visual Studio Code**.
+4. Once the container is attached, open a terminal **inside the container**.
+5. In the terminal, run:
+
+   ```bash
+   code workspace/rbac-system
+This will open the rbac-system project inside the container context.
+
+📌 Any additional project-specific setup instructions will be included in that project's README or documentation
 ---
 
 ## ⚠️ Security Notes
