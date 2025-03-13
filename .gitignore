@@ -1,0 +1,23 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+
+
+__pycache__/
+*.xml
+*.iml
+.idea
+*.pyc
+*.cpython-*
+
+# Ignore Python cache and compiled files
+*.pyc
+*.pyo
+*.pyd
+*.cpython-*
+
+# Ignore virtual environments
+venv/
+.env/
+git_token.txt
+user_rsa

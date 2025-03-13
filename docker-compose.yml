@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  rbac-container:
+    build: .
+    volumes:
+      - ./user_rsa:/root/.ssh/id_rsa:ro  # Mount the user_rsa SSH key into the container (read-only)
+      - code-data:/workspace/rbac-system
+    working_dir: /workspace/rbac-system
+    command: bash /entrypoint.sh
+    tty: true
+volumes:
+  code-data:
