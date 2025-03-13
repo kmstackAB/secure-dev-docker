@@ -51,7 +51,7 @@ You'll need an SSH key to securely access private repositories and services.
 In your terminal (macOS or Git Bash / WSL on Windows):
 
 ```bash
-ssh-keygen -t rsa -b 4096 -C "build-bot@kmstack.com" -f ./user_rsa
+ssh-keygen -t rsa -b 4096 -C "<the email in which you were added unto this repo/propject>" -f ./user_rsa
 ```
 
 > 📤 **Send your _public key only_ (`user_rsa.pub`) to your admin.**  
