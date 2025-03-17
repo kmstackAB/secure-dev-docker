@@ -1,0 +1,6 @@
+FROM ghcr.io/kmstackab/kmstack-bare-image:latest
+
+COPY ./scripts/parse-env.sh /parse-env.sh
+RUN chmod +x /parse-env.sh
+
+CMD ["/parse-env.sh"]

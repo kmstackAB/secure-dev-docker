@@ -10,6 +10,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y \
     git \
     curl \
+    grep \
     postgresql \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
@@ -17,7 +18,7 @@ RUN apt-get update && apt-get install -y \
 RUN mkdir -p /workspace
 
 # Copy entrypoint script into the image
-COPY entrypoint.sh /entrypoint.sh
+COPY ./scripts/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 # Set default work directory

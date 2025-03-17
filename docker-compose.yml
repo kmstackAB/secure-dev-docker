@@ -1,13 +1,29 @@
 version: "3.8"
 
 services:
-  rbac-container:
+  rbac-backend:
     build: .
     volumes:
-      - ./user_rsa:/root/.ssh/id_rsa:ro  # Mount the user_rsa SSH key into the container (read-only)
+      - ./user_rsa:/root/.ssh/id_rsa:ro
       - code-data:/workspace/rbac-system
     working_dir: /workspace/rbac-system
     command: bash /entrypoint.sh
     tty: true
+
+  postgres-db:
+    image: postgres:16
+    container_name: postgres-db
+    env_file:
+      - ./generated-env/.env
+    environment:
+      POSTGRES_USER: ${SERVER_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./generated-env/init-final.sql:/docker-entrypoint-initdb.d/init.sql:ro
+
 volumes:
   code-data:
+  postgres-data:

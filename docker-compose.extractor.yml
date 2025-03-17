@@ -1,0 +1,9 @@
+version: "3.8"
+
+services:
+  config-extractor:
+    build:
+      context: .
+      dockerfile: Dockerfile.extractor
+    volumes:
+      - ./generated-env/:/generated-env/
