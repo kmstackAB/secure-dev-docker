@@ -7,8 +7,12 @@ trap 'echo "[INFO] Script completed successfully."' EXIT
 
 echo "[INFO] Cleaning up old containers and volumes..."
 rm -rf generated-env
-docker-compose down -v || echo "[WARN] docker-compose down failed — continuing."
+mkdir generated-env
+touch generated-env/.env
+docker builder prune -f
+docker-compose down --volumes --remove-orphans || echo "[WARN] docker-compose down failed — continuing."
 docker system prune -a --volumes -f
+rm -rf generated-env
 
 echo "[INFO] Extracting environment variables from image..."
 if docker-compose -f docker-compose.extractor.yml up --build --abort-on-container-exit; then
