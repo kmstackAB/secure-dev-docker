@@ -16,6 +16,8 @@ export DATABASE=$(grep -oP '^SERVER_DB\s*=\s*\K.*' /root/dev.config.ini)
 export SERVER_USER=$(grep -oP '^SERVER_USER\s*=\s*\K.*' /root/dev.config.ini)
 export SERVER_PSW=$(grep -oP '^SERVER_PSW\s*=\s*\K.*' /root/dev.config.ini)
 export ADMIN_ROLE_PASSWORD=$(grep -oP '^ADMIN_ROLE_PASSWORD\s*=\s*\K.*' /root/dev.config.ini)
+export REDIS_URL=$(grep -oP '^REDIS_URL\s*=\s*\K.*' /root/dev.config.ini)
+export REDIS_PORT=$(grep -oP '^REDIS_PORT\s*=\s*\K.*' /root/dev.config.ini)
 
 # Check if any required variables are missing and exit if so
 if [[ -z "$DATABASE" || -z "$SERVER_USER" || -z "$SERVER_PSW" || -z "$ADMIN_ROLE_PASSWORD" ]]; then
@@ -28,6 +30,8 @@ echo "SERVER_USER=$SERVER_USER" >> /generated-env/.env
 echo "ADMIN_ROLE_PASSWORD=$ADMIN_ROLE_PASSWORD" >> /generated-env/.env
 echo "POSTGRES_PASSWORD=$SERVER_PSW" >> /generated-env/.env
 echo "SCHEMA=auth" >> /generated-env/.env
+echo "REDIS_URL=$REDIS_URL" >> /generated-env/.env
+echo "REDIS_PORT=$REDIS_PORT" >> /generated-env/.env
 
 
 # Output the parsed variables (for debugging)

@@ -13,6 +13,7 @@ RUN apt-get update && apt-get install -y \
     grep \
     libpq-dev \
     postgresql \
+    redis-tools \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Create workspace directory
