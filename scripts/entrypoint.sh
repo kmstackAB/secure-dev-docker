@@ -48,3 +48,6 @@ exec tail -f /dev/null
 
 
 ENV PATH="/usr/local/bin:$PATH"
+
+
+# docker exec -it postgres-db psql -U kmstack_dev_user

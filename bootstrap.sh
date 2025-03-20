@@ -20,21 +20,27 @@ trap 'echo "[ERROR] Script terminated unexpectedly"; exit 1' INT TERM ERR
 trap 'echo "[INFO] Script completed successfully."' EXIT
 
 CLEAN_BUILD=false
+RUN_ONLY_DB=false
 while [[ $# -gt 0 ]]; do
     case $1 in
         -c)
             CLEAN_BUILD=true
+        ;;
+        -only-db)
+            RUN_ONLY_DB=true
+        ;;
     esac
     shift
 done
+
+rm -rf generated-env
+mkdir generated-env
+touch generated-env/.env
 
 if $CLEAN_BUILD; then
     echo "[INFO] Cleaning up old containers and volumes..."
 
     # Clean up process
-    rm -rf generated-env
-    mkdir generated-env
-    touch generated-env/.env
     docker kill redis-client || true
     docker rm redis-client || true
     docker builder prune -f
@@ -68,7 +74,11 @@ if [ ! -f ./generated-env/init-final.sql ]; then
 fi
 
 echo "[INFO] Starting main application services..."
-docker-compose -f docker-compose.yml up -d --build --remove-orphans
+if  $RUN_ONLY_DB; then
+    docker compose -f 'docker-compose.yml' up -d --build 'postgres-db'
+else
+    docker-compose -f docker-compose.yml up -d --build --remove-orphans
+fi
 
 echo "[INFO] Waiting for Postgres to be ready..."
 until docker exec postgres-db pg_isready -U postgres; do
